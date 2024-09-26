@@ -1,6 +1,6 @@
 
 
-import { Suspense, use } from 'react';
+import { use } from 'react';
 import Image from 'next/image'
 import { Flex, Box, Text, Icon } from '@chakra-ui/react';
 
@@ -12,8 +12,8 @@ import { fetchApi,baseUrl } from '@/utils/fetchApi';
 
 const Search = ({ searchParams }) => {
 
-    const data = use(getData(searchParams));
-    const properties = data.properties;
+    console.log('router', searchParams);
+    const {properties} = use(getData(searchParams));
 
     return (
         <Box>
@@ -30,24 +30,12 @@ const Search = ({ searchParams }) => {
                     <Text fontSize={"2xl"} marginTop={"3"}>No results</Text>
                 </Flex>
             )}
+
         </Box>
     )
 }
 
-export default function SuspenseWrapper(props) {
-    return (
-      <Suspense fallback={<Loading />}>
-        <Search {...props} />
-      </Suspense>
-    );
-  }
-
-  const Loading = () => (
-    <Box textAlign="center" mt="5">
-      <Text fontSize="xl">Loading properties...</Text>
-    </Box>
-  );
-// export default Search
+export default Search
 
 export async function getData(query) {
     const purpose = query.purpose || 'for-rent';

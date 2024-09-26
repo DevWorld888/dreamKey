@@ -28,9 +28,9 @@ export default function RootLayout({ children }) {
             <header>
               <MainMenu />
             </header>
-            <Suspense fallback={<Loading/>}>
+           
               {children}
-            </Suspense>
+          
             <footer>
               <Footer />
             </footer>
